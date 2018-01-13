@@ -17,9 +17,8 @@ set(SOURCES
 
 add_library(objlib OBJECT ${SOURCES})
 
-set_property(TARGET ${objlib} PROPERTY POSITION_INDEPENDENT_CODE 1)
-
 add_library(cjieba SHARED $<TARGET_OBJECTS:objlib>)
 add_library(cjieba_static STATIC $<TARGET_OBJECTS:objlib>)
+set_property(TARGET cjieba PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 set_target_properties(cjieba PROPERTIES PUBLIC_HEADER ${PROJECT_SOURCE_DIR}/include/jieba.h)
