@@ -7,6 +7,7 @@ if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 set(CMAKE_MACOSX_RPATH 1)
+set (CMAKE_POSITION_INDEPENDENT_CODE TURE)
 
 include_directories(${PROJECT_SOURCE_DIR}/cppjieba/deps)
 include_directories(${PROJECT_SOURCE_DIR}/cppjieba/include)
@@ -19,6 +20,5 @@ add_library(objlib OBJECT ${SOURCES})
 
 add_library(cjieba SHARED $<TARGET_OBJECTS:objlib>)
 add_library(cjieba_static STATIC $<TARGET_OBJECTS:objlib>)
-set_property(TARGET cjieba PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 set_target_properties(cjieba PROPERTIES PUBLIC_HEADER ${PROJECT_SOURCE_DIR}/include/jieba.h)
