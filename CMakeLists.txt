@@ -7,7 +7,7 @@ if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 set(CMAKE_MACOSX_RPATH 1)
-set (CMAKE_POSITION_INDEPENDENT_CODE TURE)
+set (CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 include_directories(${PROJECT_SOURCE_DIR}/cppjieba/deps)
 include_directories(${PROJECT_SOURCE_DIR}/cppjieba/include)
