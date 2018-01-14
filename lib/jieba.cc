@@ -53,6 +53,10 @@ void jieba_free(jieba_t handle) {
   delete x;
 }
 
+void jieba_reset_separators(jieba_t handle, const char* sep) {
+  ((cppjieba::Jieba*)handle)->ResetSeparators(sep);
+}
+
 void jieba_words_free(jieba_words_t* words) {
     for (size_t i = 0; i < words->len ; i++) {
         if (words->words[i] != NULL) {

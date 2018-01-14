@@ -25,6 +25,7 @@ jieba_words_t* jieba_cut_for_search(jieba_t handle, const char* sentence, int is
 jieba_words_t* jieba_tag(jieba_t handle, const char* sentence);
 const char* jieba_lookup_tag(jieba_t handle, const char* str);
 void jieba_add_word(jieba_t handle, const char* word);
+void jieba_reset_separators(jieba_t handle, const char* sep);
 
 typedef struct {
   size_t offset;
