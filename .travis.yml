@@ -4,35 +4,7 @@ compiler:
   - clang
   - gcc
 
-cache:
-  directories:
-  - "${HOME}/kcov/"
-
-addons:
-  apt:
-    packages:
-      - libcurl4-openssl-dev
-      - libelf-dev
-      - libdw-dev
-      - binutils-dev
-
 script:
-    - mkdir build && cd build && cmake .. && make && cd ..
-
-after_success:
-  # Install kcov
-  - wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-  - tar xzf master.tar.gz
-  - cd kcov-master
-  - mkdir build
-  - cd build
-  - cmake -DCMAKE_INSTALL_PREFIX=${HOME}/kcov ..
-  - make
-  - make install
-  - cd ../..
-  - rm -rf kcov-master
-  # Run coverage
-  - mkdir -p coverage
+  - mkdir build && cd build && cmake .. && make && cd ..
   - cp build/demo demo
-  - ${HOME}/kcov/bin/kcov coverage demo
-  - bash <(curl -s https://codecov.io/bash) -s coverage
+  - ./demo
