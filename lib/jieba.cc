@@ -124,7 +124,7 @@ const char* jieba_lookup_tag(jieba_t handle, const char* str) {
   return strdup(tag.c_str());
 }
 
-void jieba_free_str(char* str) {
+void jieba_str_free(char* str) {
   free(str);
 }
 
