@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/messense/cppjieba-cabi.svg?branch=master)](https://travis-ci.org/messense/cppjieba-cabi)
 
-C ABI for CppJieba
+Idomatic C ABI for [CppJieba](https://github.com/yanyiwu/cppjieba)
 
 ## Build
 
