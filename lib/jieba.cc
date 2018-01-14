@@ -67,27 +67,27 @@ void jieba_token_free(jieba_token_t* tokens) {
     free(tokens);
 }
 
-jieba_words_t* jieba_cut(jieba_t x, const char* sentence, int is_hmm_used) {
+jieba_words_t* jieba_cut(jieba_t handle, const char* sentence, int is_hmm_used) {
   std::vector<std::string> words;
-  ((cppjieba::Jieba*)x)->Cut(sentence, words, is_hmm_used);
+  ((cppjieba::Jieba*)handle)->Cut(sentence, words, is_hmm_used);
   return convert_words(words);
 }
 
-jieba_words_t* jieba_cut_all(jieba_t x, const char* sentence) {
+jieba_words_t* jieba_cut_all(jieba_t handle, const char* sentence) {
   std::vector<std::string> words;
-  ((cppjieba::Jieba*)x)->CutAll(sentence, words);
+  ((cppjieba::Jieba*)handle)->CutAll(sentence, words);
   return convert_words(words);
 }
 
-jieba_words_t* jieba_cut_for_search(jieba_t x, const char* sentence, int is_hmm_used) {
+jieba_words_t* jieba_cut_for_search(jieba_t handle, const char* sentence, int is_hmm_used) {
   std::vector<std::string> words;
-  ((cppjieba::Jieba*)x)->CutForSearch(sentence, words, is_hmm_used);
+  ((cppjieba::Jieba*)handle)->CutForSearch(sentence, words, is_hmm_used);
   return convert_words(words);
 }
 
-jieba_words_t* jieba_tag(jieba_t x, const char* sentence) {
+jieba_words_t* jieba_tag(jieba_t handle, const char* sentence) {
   std::vector<std::pair<std::string, std::string> > result;
-  ((cppjieba::Jieba*)x)->Tag(sentence, result);
+  ((cppjieba::Jieba*)handle)->Tag(sentence, result);
   std::vector<std::string> words;
   words.reserve(result.size());
   for (size_t i = 0; i < result.size(); ++i) {
@@ -96,18 +96,18 @@ jieba_words_t* jieba_tag(jieba_t x, const char* sentence) {
   return convert_words(words);
 }
 
-void jieba_add_word(jieba_t x, const char* word) {
-  ((cppjieba::Jieba*)x)->InsertUserWord(word);
+void jieba_add_word(jieba_t handle, const char* word) {
+  ((cppjieba::Jieba*)handle)->InsertUserWord(word);
 }
 
-jieba_token_t* jieba_tokenize(jieba_t x, const char* sentence, jieba_tokenize_mode_t mode, int is_hmm_used) {
+jieba_token_t* jieba_tokenize(jieba_t handle, const char* sentence, jieba_tokenize_mode_t mode, int is_hmm_used) {
   std::vector<cppjieba::Word> words;
   switch (mode) {
     case JIEBA_TOKENIZE_MODE_SEARCH:
-      ((cppjieba::Jieba*)x)->CutForSearch(sentence, words, is_hmm_used);
+      ((cppjieba::Jieba*)handle)->CutForSearch(sentence, words, is_hmm_used);
       return convert_tokens(words);
     default:
-      ((cppjieba::Jieba*)x)->Cut(sentence, words, is_hmm_used);
+      ((cppjieba::Jieba*)handle)->Cut(sentence, words, is_hmm_used);
       return convert_tokens(words);
   }
 }
