@@ -86,9 +86,21 @@ jieba_words_t* jieba_cut_all(jieba_t handle, const char* sentence) {
   return convert_words(words);
 }
 
+jieba_words_t* jieba_cut_hmm(jieba_t handle, const char* sentence) {
+  std::vector<std::string> words;
+  ((cppjieba::Jieba*)handle)->CutHMM(sentence, words);
+  return convert_words(words);
+}
+
 jieba_words_t* jieba_cut_for_search(jieba_t handle, const char* sentence, int is_hmm_used) {
   std::vector<std::string> words;
   ((cppjieba::Jieba*)handle)->CutForSearch(sentence, words, is_hmm_used);
+  return convert_words(words);
+}
+
+jieba_words_t* jieba_cut_small(jieba_t handle, const char* sentence, size_t max_word_len) {
+  std::vector<std::string> words;
+  ((cppjieba::Jieba*)handle)->CutSmall(sentence, words, max_word_len);
   return convert_words(words);
 }
 
