@@ -96,6 +96,11 @@ jieba_words_t* jieba_tag(jieba_t handle, const char* sentence) {
   return convert_words(words);
 }
 
+const char* jieba_lookup_tag(jieba_t handle, const char* str) {
+  std::string tag = ((cppjieba::Jieba*)handle)->LookupTag(str);
+  return tag.c_str();
+}
+
 void jieba_add_word(jieba_t handle, const char* word) {
   ((cppjieba::Jieba*)handle)->InsertUserWord(word);
 }

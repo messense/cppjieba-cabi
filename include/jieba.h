@@ -23,6 +23,7 @@ jieba_words_t* jieba_cut(jieba_t handle, const char* sentence, int is_hmm_used);
 jieba_words_t* jieba_cut_all(jieba_t handle, const char* sentence);
 jieba_words_t* jieba_cut_for_search(jieba_t handle, const char* sentence, int is_hmm_used);
 jieba_words_t* jieba_tag(jieba_t handle, const char* sentence);
+const char* jieba_lookup_tag(jieba_t handle, const char* str);
 void jieba_add_word(jieba_t handle, const char* word);
 
 typedef struct {
