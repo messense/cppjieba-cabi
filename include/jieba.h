@@ -1,10 +1,6 @@
 #ifndef CPP_JIEBA_C_ABI_H_H
 #define CPP_JIEBA_C_ABI_H_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <stdlib.h>
 #include <stdbool.h>
 
@@ -53,9 +49,5 @@ typedef struct {
 jieba_words_t* jieba_extract(jieba_t handle, const char* sentence, int top_k);
 jieba_word_weight_t* jieba_extract_with_weight(jieba_t handle, const char* sentence, int top_k);
 void jieba_word_weight_free(jieba_word_weight_t* wws);
-
-#ifdef __cplusplus
-} /* end extern "C" */
-#endif
 
 #endif // CPP_JIEBA_C_ABI_H_H

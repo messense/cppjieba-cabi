@@ -1,7 +1,9 @@
 #include "cppjieba/Jieba.hpp"
 #include "cppjieba/KeywordExtractor.hpp"
 
-#include "jieba.h"
+extern "C" {
+  #include "jieba.h"
+}
 
 using namespace std;
 
