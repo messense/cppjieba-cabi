@@ -105,7 +105,7 @@ const char* jieba_lookup_tag(jieba_t handle, const char* str) {
   return tag.c_str();
 }
 
-void jieba_add_word(jieba_t handle, const char* word) {
+void jieba_add_user_word(jieba_t handle, const char* word) {
   ((cppjieba::Jieba*)handle)->InsertUserWord(word);
 }
 
