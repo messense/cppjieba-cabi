@@ -109,6 +109,13 @@ void jieba_add_user_word(jieba_t handle, const char* word) {
   ((cppjieba::Jieba*)handle)->InsertUserWord(word);
 }
 
+void jieba_add_user_words(jieba_t handle, const char** words, size_t count) {
+  cppjieba::Jieba* x = (cppjieba::Jieba*)handle;
+  for (size_t i = 0; i < count; i++) {
+    x->InsertUserWord(words[i]);
+  }
+}
+
 jieba_token_t* jieba_tokenize(jieba_t handle, const char* sentence, jieba_tokenize_mode_t mode, int is_hmm_used) {
   std::vector<cppjieba::Word> words;
   switch (mode) {
