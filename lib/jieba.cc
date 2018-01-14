@@ -8,7 +8,7 @@ using namespace std;
 static jieba_words_t* convert_words(const std::vector<string>& words) {
     size_t len = words.size();
     jieba_words_t* res = static_cast<jieba_words_t*>(malloc(sizeof(jieba_words_t) * len));
-    res->len = len;
+    res->length = len;
     res->words = static_cast<char**>(malloc(sizeof(char*) * len));
     for (size_t i = 0; i < len; i++) {
         res->words[i] = strdup(words[i].c_str());
@@ -20,11 +20,14 @@ static jieba_token_t* convert_tokens(const std::vector<cppjieba::Word>& words) {
     size_t len = words.size();
     jieba_token_t* res = static_cast<jieba_token_t*>(malloc(sizeof(jieba_token_t) * (len + 1)));
     for (size_t i = 0; i < len; i++) {
-        res[i].offset = words[i].offset;
-        res[i].len = words[i].word.size();
+      auto word = words[i];
+      res[i].offset = word.offset;
+      res[i].length = word.word.size();
+      res[i].unicode_offset = word.unicode_offset;
+      res[i].unicode_length = word.unicode_length;
     }
     res[words.size()].offset = 0;
-    res[words.size()].len = 0;
+    res[words.size()].length = 0;
     return res;
 }
 
@@ -58,7 +61,7 @@ void jieba_reset_separators(jieba_t handle, const char* sep) {
 }
 
 void jieba_words_free(jieba_words_t* words) {
-    for (size_t i = 0; i < words->len ; i++) {
+    for (size_t i = 0; i < words->length; i++) {
         if (words->words[i] != NULL) {
             free(words->words[i]);
         }

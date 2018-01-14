@@ -14,7 +14,7 @@ void jieba_free(jieba_t);
 
 typedef struct {
   char** words;
-  size_t len;
+  size_t length;
 } jieba_words_t;
 
 void jieba_words_free(jieba_words_t* words);
@@ -29,8 +29,10 @@ void jieba_add_user_words(jieba_t handle, const char** words, size_t count);
 void jieba_reset_separators(jieba_t handle, const char* sep);
 
 typedef struct {
-  size_t offset;
-  size_t len;
+  uint32_t offset;
+  size_t length;
+  uint32_t unicode_offset;
+  uint32_t unicode_length;
 } jieba_token_t;
 
 typedef enum {
