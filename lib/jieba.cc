@@ -30,6 +30,8 @@ static jieba_token_t* convert_tokens(const std::vector<cppjieba::Word>& words) {
     }
     res[words.size()].offset = 0;
     res[words.size()].length = 0;
+    res[words.size()].unicode_offset = 0;
+    res[words.size()].unicode_length = 0;
     return res;
 }
 
