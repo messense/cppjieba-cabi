@@ -38,8 +38,7 @@ static jieba_token_t* convert_tokens(const std::vector<cppjieba::Word>& words) {
 static jieba_word_weight_t* convert_word_weights(const std::vector<std::pair<std::string, double> >& words) {
   jieba_word_weight_t* res = static_cast<jieba_word_weight_t*>(malloc(sizeof(jieba_word_weight_t) * (words.size() + 1)));
   for (size_t i = 0; i < words.size(); i++) {
-    res[i].word = static_cast<char*>(malloc(sizeof(char) * (words[i].first.length() + 1)));
-    strcpy(res[i].word, words[i].first.c_str());
+    res[i].word = strdup(words[i].first.c_str());
     res[i].weight = words[i].second;
   }
   res[words.size()].word = NULL;
