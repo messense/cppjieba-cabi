@@ -14,7 +14,7 @@ const char* STOP_WORDS_PATH = "./cppjieba/dict/stop_words.utf8";
 void CutDemo() {
   printf("CutDemo:\n");
   // init will take a few seconds to load dicts.
-  jieba_t handle = jieba_new(DICT_PATH, HMM_PATH, USER_DICT, IDF_PATH, STOP_WORDS_PATH);
+  jieba_t* handle = jieba_new(DICT_PATH, HMM_PATH, USER_DICT, IDF_PATH, STOP_WORDS_PATH);
 
   const char* s = "南京市长江大桥";
   jieba_words_t* words = jieba_cut(handle, s, 1);
@@ -29,7 +29,7 @@ void CutDemo() {
 void CutAllDemo() {
   printf("CutAllDemo:\n");
   // init will take a few seconds to load dicts.
-  jieba_t handle = jieba_new(DICT_PATH, HMM_PATH, USER_DICT, IDF_PATH, STOP_WORDS_PATH);
+  jieba_t* handle = jieba_new(DICT_PATH, HMM_PATH, USER_DICT, IDF_PATH, STOP_WORDS_PATH);
 
   const char* s = "我是拖拉机学院手扶拖拉机专业的。不用多久，我就会升职加薪，当上CEO，走上人生巅峰。";
   jieba_words_t* words = jieba_cut_all(handle, s);
@@ -44,7 +44,7 @@ void CutAllDemo() {
 void UserWordDemo()
 {
   printf("UserWordDemo:\n");
-  jieba_t handle = jieba_new(DICT_PATH, HMM_PATH, USER_DICT, IDF_PATH, STOP_WORDS_PATH);
+  jieba_t* handle = jieba_new(DICT_PATH, HMM_PATH, USER_DICT, IDF_PATH, STOP_WORDS_PATH);
 
   const char* s = "人艰不拆";
 

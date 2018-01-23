@@ -49,17 +49,17 @@ static jieba_word_weight_t* convert_word_weights(const std::vector<std::pair<std
 extern "C" {
 #endif
 
-jieba_t jieba_new(const char* dict_path, const char* hmm_path, const char* user_dict, const char* idf_path, const char* stop_words_path) {
-  jieba_t handle = (jieba_t)(new cppjieba::Jieba(dict_path, hmm_path, user_dict, idf_path, stop_words_path));
+jieba_t* jieba_new(const char* dict_path, const char* hmm_path, const char* user_dict, const char* idf_path, const char* stop_words_path) {
+  jieba_t* handle = (jieba_t*)(new cppjieba::Jieba(dict_path, hmm_path, user_dict, idf_path, stop_words_path));
   return handle;
 }
 
-void jieba_free(jieba_t handle) {
+void jieba_free(jieba_t* handle) {
   cppjieba::Jieba* x = (cppjieba::Jieba*)handle;
   delete x;
 }
 
-void jieba_reset_separators(jieba_t handle, const char* sep) {
+void jieba_reset_separators(jieba_t* handle, const char* sep) {
   ((cppjieba::Jieba*)handle)->ResetSeparators(sep);
 }
 
@@ -77,37 +77,37 @@ void jieba_token_free(jieba_token_t* tokens) {
     free(tokens);
 }
 
-jieba_words_t* jieba_cut(jieba_t handle, const char* sentence, int is_hmm_used) {
+jieba_words_t* jieba_cut(jieba_t* handle, const char* sentence, int is_hmm_used) {
   std::vector<std::string> words;
   ((cppjieba::Jieba*)handle)->Cut(sentence, words, is_hmm_used);
   return convert_words(words);
 }
 
-jieba_words_t* jieba_cut_all(jieba_t handle, const char* sentence) {
+jieba_words_t* jieba_cut_all(jieba_t* handle, const char* sentence) {
   std::vector<std::string> words;
   ((cppjieba::Jieba*)handle)->CutAll(sentence, words);
   return convert_words(words);
 }
 
-jieba_words_t* jieba_cut_hmm(jieba_t handle, const char* sentence) {
+jieba_words_t* jieba_cut_hmm(jieba_t* handle, const char* sentence) {
   std::vector<std::string> words;
   ((cppjieba::Jieba*)handle)->CutHMM(sentence, words);
   return convert_words(words);
 }
 
-jieba_words_t* jieba_cut_for_search(jieba_t handle, const char* sentence, int is_hmm_used) {
+jieba_words_t* jieba_cut_for_search(jieba_t* handle, const char* sentence, int is_hmm_used) {
   std::vector<std::string> words;
   ((cppjieba::Jieba*)handle)->CutForSearch(sentence, words, is_hmm_used);
   return convert_words(words);
 }
 
-jieba_words_t* jieba_cut_small(jieba_t handle, const char* sentence, size_t max_word_len) {
+jieba_words_t* jieba_cut_small(jieba_t* handle, const char* sentence, size_t max_word_len) {
   std::vector<std::string> words;
   ((cppjieba::Jieba*)handle)->CutSmall(sentence, words, max_word_len);
   return convert_words(words);
 }
 
-jieba_words_t* jieba_tag(jieba_t handle, const char* sentence) {
+jieba_words_t* jieba_tag(jieba_t* handle, const char* sentence) {
   std::vector<std::pair<std::string, std::string> > result;
   ((cppjieba::Jieba*)handle)->Tag(sentence, result);
   std::vector<std::string> words;
@@ -118,7 +118,7 @@ jieba_words_t* jieba_tag(jieba_t handle, const char* sentence) {
   return convert_words(words);
 }
 
-const char* jieba_lookup_tag(jieba_t handle, const char* str) {
+const char* jieba_lookup_tag(jieba_t* handle, const char* str) {
   std::string tag = ((cppjieba::Jieba*)handle)->LookupTag(str);
   return strdup(tag.c_str());
 }
@@ -127,18 +127,18 @@ void jieba_str_free(char* str) {
   free(str);
 }
 
-void jieba_add_user_word(jieba_t handle, const char* word) {
+void jieba_add_user_word(jieba_t* handle, const char* word) {
   ((cppjieba::Jieba*)handle)->InsertUserWord(word);
 }
 
-void jieba_add_user_words(jieba_t handle, const char** words, size_t count) {
+void jieba_add_user_words(jieba_t* handle, const char** words, size_t count) {
   cppjieba::Jieba* x = (cppjieba::Jieba*)handle;
   for (size_t i = 0; i < count; i++) {
     x->InsertUserWord(words[i]);
   }
 }
 
-jieba_token_t* jieba_tokenize(jieba_t handle, const char* sentence, jieba_tokenize_mode_t mode, int is_hmm_used) {
+jieba_token_t* jieba_tokenize(jieba_t* handle, const char* sentence, jieba_tokenize_mode_t mode, int is_hmm_used) {
   std::vector<cppjieba::Word> words;
   switch (mode) {
     case JIEBA_TOKENIZE_MODE_SEARCH:
@@ -150,14 +150,14 @@ jieba_token_t* jieba_tokenize(jieba_t handle, const char* sentence, jieba_tokeni
   }
 }
 
-jieba_word_weight_t* jieba_extract_with_weight(jieba_t handle, const char* sentence, int top_k) {
+jieba_word_weight_t* jieba_extract_with_weight(jieba_t* handle, const char* sentence, int top_k) {
   std::vector<std::pair<std::string, double> > words;
   ((cppjieba::Jieba*)handle)->extractor.Extract(sentence, words, top_k);
   jieba_word_weight_t* res = convert_word_weights(words);
   return res;
 }
 
-jieba_words_t* jieba_extract(jieba_t handle, const char* sentence, int top_k) {
+jieba_words_t* jieba_extract(jieba_t* handle, const char* sentence, int top_k) {
   std::vector<std::string> words;
   ((cppjieba::Jieba*)handle)->extractor.Extract(sentence, words, top_k);
   return convert_words(words);
