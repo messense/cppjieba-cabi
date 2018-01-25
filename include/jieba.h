@@ -14,6 +14,7 @@ typedef struct {
 } jieba_words_t;
 
 void jieba_words_free(jieba_words_t* words);
+void jieba_str_free(char* str);
 
 jieba_words_t* jieba_cut(jieba_t* handle, const char* sentence, int is_hmm_used);
 jieba_words_t* jieba_cut_all(jieba_t* handle, const char* sentence);
