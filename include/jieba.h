@@ -22,7 +22,7 @@ jieba_words_t* jieba_cut_hmm(jieba_t* handle, const char* sentence);
 jieba_words_t* jieba_cut_for_search(jieba_t* handle, const char* sentence, int is_hmm_used);
 jieba_words_t* jieba_cut_small(jieba_t* handle, const char* sentence, size_t max_word_len);
 jieba_words_t* jieba_tag(jieba_t* handle, const char* sentence);
-const char* jieba_lookup_tag(jieba_t* handle, const char* str);
+char* jieba_lookup_tag(jieba_t* handle, const char* str);
 void jieba_add_user_word(jieba_t* handle, const char* word);
 void jieba_add_user_words(jieba_t* handle, const char** words, size_t count);
 void jieba_reset_separators(jieba_t* handle, const char* sep);

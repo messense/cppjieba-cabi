@@ -118,7 +118,7 @@ jieba_words_t* jieba_tag(jieba_t* handle, const char* sentence) {
   return convert_words(words);
 }
 
-const char* jieba_lookup_tag(jieba_t* handle, const char* str) {
+char* jieba_lookup_tag(jieba_t* handle, const char* str) {
   std::string tag = ((cppjieba::Jieba*)handle)->LookupTag(str);
   return strdup(tag.c_str());
 }
